@@ -36,11 +36,20 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabConnection = new System.Windows.Forms.TabPage();
             this.splitContainerSearchConnection = new System.Windows.Forms.SplitContainer();
+            this.listConnectionSearch = new System.Windows.Forms.ListView();
             this.tabConnectionBoard = new System.Windows.Forms.TabPage();
+            this.clmDeparture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmArrival = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmDuration = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmStart = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmDestination = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmPlatformStart = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmPlatformDestination = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchConnection)).BeginInit();
             this.splitContainerSearchConnection.Panel1.SuspendLayout();
+            this.splitContainerSearchConnection.Panel2.SuspendLayout();
             this.splitContainerSearchConnection.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,18 +58,18 @@
             this.lblStartSearch.AutoSize = true;
             this.lblStartSearch.Location = new System.Drawing.Point(10, 10);
             this.lblStartSearch.Name = "lblStartSearch";
-            this.lblStartSearch.Size = new System.Drawing.Size(29, 13);
+            this.lblStartSearch.Size = new System.Drawing.Size(30, 13);
             this.lblStartSearch.TabIndex = 3;
-            this.lblStartSearch.Text = "Start";
+            this.lblStartSearch.Text = "From";
             // 
             // lblDestinationSearch
             // 
             this.lblDestinationSearch.AutoSize = true;
             this.lblDestinationSearch.Location = new System.Drawing.Point(10, 66);
             this.lblDestinationSearch.Name = "lblDestinationSearch";
-            this.lblDestinationSearch.Size = new System.Drawing.Size(60, 13);
+            this.lblDestinationSearch.Size = new System.Drawing.Size(20, 13);
             this.lblDestinationSearch.TabIndex = 4;
-            this.lblDestinationSearch.Text = "Destination";
+            this.lblDestinationSearch.Text = "To";
             // 
             // txtStartSearch
             // 
@@ -69,7 +78,7 @@
             this.txtStartSearch.FormattingEnabled = true;
             this.txtStartSearch.Location = new System.Drawing.Point(13, 26);
             this.txtStartSearch.Name = "txtStartSearch";
-            this.txtStartSearch.Size = new System.Drawing.Size(246, 21);
+            this.txtStartSearch.Size = new System.Drawing.Size(209, 21);
             this.txtStartSearch.TabIndex = 5;
             this.txtStartSearch.TextUpdate += new System.EventHandler(this.txtStartSearch_TextUpdate);
             // 
@@ -80,7 +89,7 @@
             this.txtDestinationSearch.FormattingEnabled = true;
             this.txtDestinationSearch.Location = new System.Drawing.Point(13, 82);
             this.txtDestinationSearch.Name = "txtDestinationSearch";
-            this.txtDestinationSearch.Size = new System.Drawing.Size(246, 21);
+            this.txtDestinationSearch.Size = new System.Drawing.Size(209, 21);
             this.txtDestinationSearch.TabIndex = 6;
             this.txtDestinationSearch.TextUpdate += new System.EventHandler(this.txtDestinationSearch_TextUpdate);
             // 
@@ -91,10 +100,11 @@
             this.cmdSearchConnection.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.cmdSearchConnection.Location = new System.Drawing.Point(13, 127);
             this.cmdSearchConnection.Name = "cmdSearchConnection";
-            this.cmdSearchConnection.Size = new System.Drawing.Size(246, 21);
+            this.cmdSearchConnection.Size = new System.Drawing.Size(209, 21);
             this.cmdSearchConnection.TabIndex = 9;
             this.cmdSearchConnection.Text = "Search Connection";
             this.cmdSearchConnection.UseVisualStyleBackColor = false;
+            this.cmdSearchConnection.Click += new System.EventHandler(this.cmdSearchConnection_Click);
             // 
             // tabControl
             // 
@@ -105,7 +115,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(0, 0);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(592, 373);
+            this.tabControl.Size = new System.Drawing.Size(780, 373);
             this.tabControl.TabIndex = 10;
             // 
             // tabConnection
@@ -114,7 +124,7 @@
             this.tabConnection.Location = new System.Drawing.Point(4, 22);
             this.tabConnection.Name = "tabConnection";
             this.tabConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConnection.Size = new System.Drawing.Size(584, 347);
+            this.tabConnection.Size = new System.Drawing.Size(772, 347);
             this.tabConnection.TabIndex = 0;
             this.tabConnection.Text = "Search Connection";
             this.tabConnection.UseVisualStyleBackColor = true;
@@ -134,10 +144,32 @@
             this.splitContainerSearchConnection.Panel1.Controls.Add(this.lblDestinationSearch);
             this.splitContainerSearchConnection.Panel1.Controls.Add(this.txtDestinationSearch);
             this.splitContainerSearchConnection.Panel1MinSize = 200;
+            // 
+            // splitContainerSearchConnection.Panel2
+            // 
+            this.splitContainerSearchConnection.Panel2.Controls.Add(this.listConnectionSearch);
             this.splitContainerSearchConnection.Panel2MinSize = 300;
-            this.splitContainerSearchConnection.Size = new System.Drawing.Size(578, 341);
-            this.splitContainerSearchConnection.SplitterDistance = 273;
+            this.splitContainerSearchConnection.Size = new System.Drawing.Size(766, 341);
+            this.splitContainerSearchConnection.SplitterDistance = 236;
             this.splitContainerSearchConnection.TabIndex = 10;
+            // 
+            // listConnectionSearch
+            // 
+            this.listConnectionSearch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clmStart,
+            this.clmDeparture,
+            this.clmPlatformStart,
+            this.clmDestination,
+            this.clmArrival,
+            this.clmPlatformDestination,
+            this.clmDuration});
+            this.listConnectionSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listConnectionSearch.Location = new System.Drawing.Point(0, 0);
+            this.listConnectionSearch.Name = "listConnectionSearch";
+            this.listConnectionSearch.Size = new System.Drawing.Size(524, 339);
+            this.listConnectionSearch.TabIndex = 0;
+            this.listConnectionSearch.UseCompatibleStateImageBehavior = false;
+            this.listConnectionSearch.View = System.Windows.Forms.View.Details;
             // 
             // tabConnectionBoard
             // 
@@ -146,23 +178,55 @@
             this.tabConnectionBoard.Padding = new System.Windows.Forms.Padding(3);
             this.tabConnectionBoard.Size = new System.Drawing.Size(584, 347);
             this.tabConnectionBoard.TabIndex = 1;
-            this.tabConnectionBoard.Text = "Connectionboard";
+            this.tabConnectionBoard.Text = "Departure Table";
             this.tabConnectionBoard.UseVisualStyleBackColor = true;
+            // 
+            // clmDeparture
+            // 
+            this.clmDeparture.Text = "Departure";
+            // 
+            // clmArrival
+            // 
+            this.clmArrival.Text = "Arrival";
+            // 
+            // clmDuration
+            // 
+            this.clmDuration.Text = "Duration";
+            // 
+            // clmStart
+            // 
+            this.clmStart.Text = "Start";
+            this.clmStart.Width = 110;
+            // 
+            // clmDestination
+            // 
+            this.clmDestination.Text = "Destination";
+            this.clmDestination.Width = 110;
+            // 
+            // clmPlatformStart
+            // 
+            this.clmPlatformStart.Text = "Platform";
+            // 
+            // clmPlatformDestination
+            // 
+            this.clmPlatformDestination.Text = "Platform";
             // 
             // Timetable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(592, 373);
+            this.ClientSize = new System.Drawing.Size(780, 373);
             this.Controls.Add(this.tabControl);
-            this.MinimumSize = new System.Drawing.Size(600, 400);
+            this.MaximumSize = new System.Drawing.Size(788, 800);
+            this.MinimumSize = new System.Drawing.Size(788, 400);
             this.Name = "Timetable";
             this.Text = "Timetable";
             this.tabControl.ResumeLayout(false);
             this.tabConnection.ResumeLayout(false);
             this.splitContainerSearchConnection.Panel1.ResumeLayout(false);
             this.splitContainerSearchConnection.Panel1.PerformLayout();
+            this.splitContainerSearchConnection.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchConnection)).EndInit();
             this.splitContainerSearchConnection.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -179,6 +243,14 @@
         private System.Windows.Forms.TabPage tabConnection;
         private System.Windows.Forms.SplitContainer splitContainerSearchConnection;
         private System.Windows.Forms.TabPage tabConnectionBoard;
+        private System.Windows.Forms.ListView listConnectionSearch;
+        private System.Windows.Forms.ColumnHeader clmDeparture;
+        private System.Windows.Forms.ColumnHeader clmArrival;
+        private System.Windows.Forms.ColumnHeader clmDuration;
+        private System.Windows.Forms.ColumnHeader clmStart;
+        private System.Windows.Forms.ColumnHeader clmDestination;
+        private System.Windows.Forms.ColumnHeader clmPlatformStart;
+        private System.Windows.Forms.ColumnHeader clmPlatformDestination;
     }
 }
 

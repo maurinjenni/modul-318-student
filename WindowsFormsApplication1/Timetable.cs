@@ -21,64 +21,35 @@ namespace WindowsFormsApplication1
 
         private void txtStartSearch_TextUpdate(object sender, EventArgs e)
         {
-            var box = sender as ComboBox;
-
-            if (txtStartSearch.Text.Length >= 4)
-            {
-                box.DroppedDown = true;
-
-                int Textposition = txtStartSearch.SelectionStart;
-                txtStartSearch.Items.Clear();
-                txtStartSearch.SelectionStart = Textposition;
-
-                SearchStation searchstation = new SearchStation();
-                var station = searchstation.SearchStations(txtStartSearch.Text);
-
-                foreach (var i in station.StationList)
-                {
-                    txtStartSearch.Items.Add(i.Name);
-                }
-            }
-            else
-            {
-                int Textposition = txtStartSearch.SelectionStart;
-                txtStartSearch.Items.Clear();
-                txtStartSearch.SelectionStart = Textposition;
-
-                txtStartSearch.Items.Add("");
-                box.DroppedDown = false;
-            }
+            SearchStation searchstation = new SearchStation();
+            searchstation.SearchStations((ComboBox)sender);
         }
 
         private void txtDestinationSearch_TextUpdate(object sender, EventArgs e)
         {
-            var box = sender as ComboBox;
+            SearchStation searchstation = new SearchStation();
+            searchstation.SearchStations((ComboBox)sender);
+        }
 
-            if (txtDestinationSearch.Text.Length >= 4)
+        private void cmdSearchConnection_Click(object sender, EventArgs e)
+        {
+            SearchConnection searchconnection = new SearchConnection();
+            var connecion = searchconnection.SearchConnections(txtStartSearch.Text, txtDestinationSearch.Text);
+
+
+            foreach (var i in connecion.ConnectionList)
             {
-                box.DroppedDown = true;
+                string[] sItems = new string[] { i.From.Station.Name, ConvertTimestamp(i.From.Departure), i.From.Platform, i.To.Station.Name, ConvertTimestamp(i.To.Arrival), i.To.Platform, i.Duration };
 
-                int Textposition = txtDestinationSearch.SelectionStart;
-                txtDestinationSearch.Items.Clear();
-                txtDestinationSearch.SelectionStart = Textposition;
-
-                SearchStation searchstation = new SearchStation();
-                var station = searchstation.SearchStations(txtDestinationSearch.Text);
-
-                foreach (var i in station.StationList)
-                {
-                    txtDestinationSearch.Items.Add(i.Name);
-                }
+                listConnectionSearch.Items.Add(new ListViewItem(sItems));
             }
-            else
-            {
-                int Textposition = txtDestinationSearch.SelectionStart;
-                txtDestinationSearch.Items.Clear();
-                txtDestinationSearch.SelectionStart = Textposition;
+        }
 
-                txtDestinationSearch.Items.Add("");
-                box.DroppedDown = false;
-            }
+        public string ConvertTimestamp(string ts)
+        {
+            DateTime timestamp = DateTime.Parse(ts);
+
+            return timestamp.ToString("HH:mm");
         }
     }
 }
