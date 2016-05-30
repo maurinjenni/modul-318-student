@@ -1,5 +1,4 @@
-﻿using SwissTransport;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,20 +20,34 @@ namespace WindowsFormsApplication1
         //call searchfunction for stations
         private void txtStartSearch_TextUpdate(object sender, EventArgs e)
         {
-            SearchStation searchstation = new SearchStation();
+            Search searchstation = new Search();
             searchstation.SearchStations((ComboBox)sender);
         }
 
         private void txtDestinationSearch_TextUpdate(object sender, EventArgs e)
         {
-            SearchStation searchstation = new SearchStation();
+            Search searchstation = new Search();
             searchstation.SearchStations((ComboBox)sender);
         }
 
         private void txtDepartureSearch_TextUpdate(object sender, EventArgs e)
         {
-            SearchStation searchstation = new SearchStation();
+            Search searchstation = new Search();
             searchstation.SearchStations((ComboBox)sender);
+        }
+
+        //call searchfunction for connections
+        private void cmdSearchConnection_Click(object sender, EventArgs e)
+        {
+            Search SearchConnection = new Search();
+            SearchConnection.SearchConnections(txtStartSearch, txtDestinationSearch, listConnectionSearch);
+        }
+
+        //call searchfunction for departureboard
+        private void cmdSearchTable_Click(object sender, EventArgs e)
+        {
+            Search SearchDepartureBoard = new Search();
+            SearchDepartureBoard.SearchDepartures(txtDepartureSearch, listDepartureSearch);
         }
 
         //bring back default cursor when dropdown opens
@@ -53,56 +66,5 @@ namespace WindowsFormsApplication1
             Cursor.Current = Cursors.Default;
         }
 
-
-        //call searchfunction for connections and fill ListView
-        private void cmdSearchConnection_Click(object sender, EventArgs e)
-        {
-            //clear items befor new search
-            listConnectionSearch.Items.Clear(); ;
-
-            SearchConnection searchconnection = new SearchConnection();
-            var connection = searchconnection.SearchConnections(txtStartSearch.Text, txtDestinationSearch.Text);
-
-
-            //fill ListView with result
-            foreach (var i in connection.ConnectionList)
-            {
-                string[] sItems = new string[] { i.From.Station.Name, ConvertTimestamp(i.From.Departure), i.From.Platform, i.To.Station.Name, ConvertTimestamp(i.To.Arrival), i.To.Platform, ConvertTimeDuration(i.Duration) };
-
-                listConnectionSearch.Items.Add(new ListViewItem(sItems));
-            }
-        }
-
-        //call searchfunction for departureboard and fill ListView
-        private void cmdSearchTable_Click(object sender, EventArgs e)
-        {
-            //clear items befor new search
-            listDepartureSearch.Items.Clear();
-
-            SearchDeparture searchdeparture = new SearchDeparture();
-            var departureboard = searchdeparture.SearchDepartures(txtDepartureSearch.Text);
-
-            //fill ListView with result
-            foreach (var i in departureboard.Entries)
-            {
-                string[] sItems = new string[] { departureboard.Station.Name, ConvertTimestamp(i.Stop.Departure.ToString()), i.To, i.Name };
-
-                listDepartureSearch.Items.Add(new ListViewItem(sItems));
-            };
-        }
-
-        //format timestamp
-        public string ConvertTimestamp(string ts)
-        {
-            DateTime timestamp = DateTime.Parse(ts);
-            return timestamp.ToString("HH:mm");
-        }
-
-        //format timeduration
-        public string ConvertTimeDuration(string td)
-        {
-            TimeSpan timeduration = TimeSpan.ParseExact(td, "dd'd'hh':'mm':'ss", null);
-            return timeduration.ToString(@"hh\:mm");
-        }
     }
 }
