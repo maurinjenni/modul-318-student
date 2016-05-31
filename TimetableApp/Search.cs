@@ -39,14 +39,17 @@ namespace TimetableApp
                 //errormessage if no response
                 if (transport.Error)
                 {
-                    MessageBox.Show(transport.ThrowedException.Message, "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ErrorNoConnection();
+                }
+                else
+                {
+                    //fill dropdown
+                    foreach (var i in station.StationList)
+                    {
+                        combo.Items.Add(i.Name);
+                    }
                 }
 
-                //fill dropdown
-                foreach (var i in station.StationList)
-                {
-                    combo.Items.Add(i.Name);
-                }
 
                 //set cursor back to default
                 Cursor.Current = Cursors.Default;
@@ -71,7 +74,7 @@ namespace TimetableApp
         //
         //searchfunction for connections
         //
-        public void SearchConnections(ComboBox from, ComboBox to, ListView list)
+        public void SearchConnections(ComboBox from, ComboBox to, ListView list, DateTimePicker date, DateTimePicker time, RadioButton isArrivalTime)
         {
             //clear items befor new search
             list.Items.Clear();
@@ -79,21 +82,33 @@ namespace TimetableApp
             //set cursor to wait
             Cursor.Current = Cursors.WaitCursor;
 
+            //check if radiobutton Arrival is set
+            string isArrival = "0";
+
+            if (isArrivalTime.Checked)
+            {
+                isArrival = "1";
+            }
+            else
+            {
+                isArrival = "0";
+            }
+
             //get connections
             Transport transport = new Transport();
             Connections connection = new Connections();
 
-            connection = transport.GetConnections(from.Text, to.Text);
+            connection = transport.GetConnections(from.Text, to.Text, ConvertDate(date.Value.ToString()), ConvertTimestamp(time.Value.ToString()), isArrival);
 
             //check if Error is set
             if (transport.Error)
             {
-                ErrorNoConnection(transport);
+                ErrorNoConnection();
             }
             //check if result has more than 0 items
             else if (connection.ConnectionList.Count() <= 0)
             {
-                ErrorNoResult();
+                ErrorNoConnection();
             }
             else
             {
@@ -137,12 +152,12 @@ namespace TimetableApp
                 //check if Error is set
                 if (transport.Error)
                 {
-                    ErrorNoConnection(transport);
+                    ErrorNoConnection();
                 }
                 //check if result has more than 0 items
                 else if (stationboardroot.Entries.Count() <= 0)
                 {
-                    ErrorNoResult();
+                    ErrorNoConnection();
                 }
                 else
                 {
@@ -158,7 +173,7 @@ namespace TimetableApp
             }
             else
             {
-                ErrorNoResult();
+                ErrorNoConnection();
             }
 
             //set cursor back to default
@@ -181,16 +196,18 @@ namespace TimetableApp
             return timeduration.ToString(@"hh\:mm");
         }
 
-        //errormessage: no response/connection
-        private void ErrorNoConnection(Transport transport)
+        //format date
+        private string ConvertDate(string d)
         {
-            MessageBox.Show(transport.ThrowedException.Message + "\n\nPlease try again or check your input.", "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            DateTime Date = DateTime.Parse(d);
+            return Date.ToString("yyyy-MM-dd");
         }
 
-        //errormessage: no result
-        private void ErrorNoResult()
+        //errormessage: no response/result
+        private void ErrorNoConnection()
         {
-            MessageBox.Show("No connections found, please check your input!", "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("No connections found or couldn't be loaded.\n\nPlease try again or check your input.", "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
     }
 }

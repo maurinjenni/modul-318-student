@@ -42,7 +42,7 @@ namespace TimetableApp
         private void cmdSearchConnection_Click(object sender, EventArgs e)
         {
             Search SearchConnection = new Search();
-            SearchConnection.SearchConnections(txtStartSearch, txtDestinationSearch, listConnectionSearch);
+            SearchConnection.SearchConnections(txtStartSearch, txtDestinationSearch, listConnectionSearch, DatePickerConnection, TimePickerConnection, radioArrivalConnection);
         }
 
         //call searchfunction for departureboard
@@ -70,5 +70,14 @@ namespace TimetableApp
             Cursor.Current = Cursors.Default;
         }
 
+        //update date and time once a minute, only when field isn't edited
+        private void timer1min_Tick(object sender, EventArgs e)
+        {
+            if (TimePickerConnection.Value.Minute == DateTime.Now.AddMinutes(-1).Minute && TimePickerConnection.Value.Hour == DateTime.Now.Hour)
+            {
+                DatePickerConnection.Value = DateTime.Now;
+                TimePickerConnection.Value = DateTime.Now;
+            }
+        }
     }
 }

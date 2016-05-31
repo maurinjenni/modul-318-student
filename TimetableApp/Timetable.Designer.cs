@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Timetable));
             this.lblStartSearch = new System.Windows.Forms.Label();
             this.lblDestinationSearch = new System.Windows.Forms.Label();
@@ -37,6 +38,11 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabConnection = new System.Windows.Forms.TabPage();
             this.splitContainerSearchConnection = new System.Windows.Forms.SplitContainer();
+            this.groupBoxDateConnection = new System.Windows.Forms.GroupBox();
+            this.TimePickerConnection = new System.Windows.Forms.DateTimePicker();
+            this.DatePickerConnection = new System.Windows.Forms.DateTimePicker();
+            this.radioArrivalConnection = new System.Windows.Forms.RadioButton();
+            this.radioDepartureConnection = new System.Windows.Forms.RadioButton();
             this.listConnectionSearch = new System.Windows.Forms.ListView();
             this.clmStart = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmDeparture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,12 +61,14 @@
             this.clmDepartureTable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmDestinationTable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timer1min = new System.Windows.Forms.Timer(this.components);
             this.tabControl.SuspendLayout();
             this.tabConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchConnection)).BeginInit();
             this.splitContainerSearchConnection.Panel1.SuspendLayout();
             this.splitContainerSearchConnection.Panel2.SuspendLayout();
             this.splitContainerSearchConnection.SuspendLayout();
+            this.groupBoxDateConnection.SuspendLayout();
             this.tabConnectionBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -115,11 +123,11 @@
             this.cmdSearchConnection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSearchConnection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
-            this.cmdSearchConnection.Location = new System.Drawing.Point(13, 127);
+            this.cmdSearchConnection.Location = new System.Drawing.Point(13, 221);
             this.cmdSearchConnection.Name = "cmdSearchConnection";
-            this.cmdSearchConnection.Size = new System.Drawing.Size(209, 21);
+            this.cmdSearchConnection.Size = new System.Drawing.Size(210, 28);
             this.cmdSearchConnection.TabIndex = 9;
-            this.cmdSearchConnection.Text = "Search Connection";
+            this.cmdSearchConnection.Text = "Search connection";
             this.cmdSearchConnection.UseVisualStyleBackColor = false;
             this.cmdSearchConnection.Click += new System.EventHandler(this.cmdSearchConnection_Click);
             // 
@@ -155,6 +163,7 @@
             // 
             // splitContainerSearchConnection.Panel1
             // 
+            this.splitContainerSearchConnection.Panel1.Controls.Add(this.groupBoxDateConnection);
             this.splitContainerSearchConnection.Panel1.Controls.Add(this.lblStartSearch);
             this.splitContainerSearchConnection.Panel1.Controls.Add(this.txtStartSearch);
             this.splitContainerSearchConnection.Panel1.Controls.Add(this.cmdSearchConnection);
@@ -169,6 +178,63 @@
             this.splitContainerSearchConnection.Size = new System.Drawing.Size(766, 341);
             this.splitContainerSearchConnection.SplitterDistance = 236;
             this.splitContainerSearchConnection.TabIndex = 10;
+            // 
+            // groupBoxDateConnection
+            // 
+            this.groupBoxDateConnection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxDateConnection.Controls.Add(this.TimePickerConnection);
+            this.groupBoxDateConnection.Controls.Add(this.DatePickerConnection);
+            this.groupBoxDateConnection.Controls.Add(this.radioArrivalConnection);
+            this.groupBoxDateConnection.Controls.Add(this.radioDepartureConnection);
+            this.groupBoxDateConnection.Location = new System.Drawing.Point(13, 121);
+            this.groupBoxDateConnection.Name = "groupBoxDateConnection";
+            this.groupBoxDateConnection.Size = new System.Drawing.Size(209, 83);
+            this.groupBoxDateConnection.TabIndex = 11;
+            this.groupBoxDateConnection.TabStop = false;
+            this.groupBoxDateConnection.Text = "Date";
+            // 
+            // TimePickerConnection
+            // 
+            this.TimePickerConnection.CustomFormat = "HH:mm";
+            this.TimePickerConnection.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.TimePickerConnection.Location = new System.Drawing.Point(6, 45);
+            this.TimePickerConnection.Name = "TimePickerConnection";
+            this.TimePickerConnection.ShowUpDown = true;
+            this.TimePickerConnection.Size = new System.Drawing.Size(84, 20);
+            this.TimePickerConnection.TabIndex = 13;
+            // 
+            // DatePickerConnection
+            // 
+            this.DatePickerConnection.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DatePickerConnection.Location = new System.Drawing.Point(6, 19);
+            this.DatePickerConnection.Name = "DatePickerConnection";
+            this.DatePickerConnection.Size = new System.Drawing.Size(84, 20);
+            this.DatePickerConnection.TabIndex = 12;
+            // 
+            // radioArrivalConnection
+            // 
+            this.radioArrivalConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioArrivalConnection.AutoSize = true;
+            this.radioArrivalConnection.Location = new System.Drawing.Point(118, 49);
+            this.radioArrivalConnection.Name = "radioArrivalConnection";
+            this.radioArrivalConnection.Size = new System.Drawing.Size(54, 17);
+            this.radioArrivalConnection.TabIndex = 11;
+            this.radioArrivalConnection.Text = "Arrival";
+            this.radioArrivalConnection.UseVisualStyleBackColor = true;
+            // 
+            // radioDepartureConnection
+            // 
+            this.radioDepartureConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioDepartureConnection.AutoSize = true;
+            this.radioDepartureConnection.Checked = true;
+            this.radioDepartureConnection.Location = new System.Drawing.Point(118, 23);
+            this.radioDepartureConnection.Name = "radioDepartureConnection";
+            this.radioDepartureConnection.Size = new System.Drawing.Size(72, 17);
+            this.radioDepartureConnection.TabIndex = 10;
+            this.radioDepartureConnection.TabStop = true;
+            this.radioDepartureConnection.Text = "Departure";
+            this.radioDepartureConnection.UseVisualStyleBackColor = true;
             // 
             // listConnectionSearch
             // 
@@ -277,11 +343,11 @@
             this.cmdSearchTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdSearchTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
-            this.cmdSearchTable.Location = new System.Drawing.Point(13, 62);
+            this.cmdSearchTable.Location = new System.Drawing.Point(13, 63);
             this.cmdSearchTable.Name = "cmdSearchTable";
-            this.cmdSearchTable.Size = new System.Drawing.Size(209, 21);
+            this.cmdSearchTable.Size = new System.Drawing.Size(209, 28);
             this.cmdSearchTable.TabIndex = 9;
-            this.cmdSearchTable.Text = "Search Departure";
+            this.cmdSearchTable.Text = "Search departure";
             this.cmdSearchTable.UseVisualStyleBackColor = false;
             this.cmdSearchTable.Click += new System.EventHandler(this.cmdSearchTable_Click);
             // 
@@ -319,6 +385,12 @@
             this.clmType.Text = "Type";
             this.clmType.Width = 80;
             // 
+            // timer1min
+            // 
+            this.timer1min.Enabled = true;
+            this.timer1min.Interval = 60000;
+            this.timer1min.Tick += new System.EventHandler(this.timer1min_Tick);
+            // 
             // Timetable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -330,6 +402,7 @@
             this.MaximumSize = new System.Drawing.Size(788, 800);
             this.MinimumSize = new System.Drawing.Size(788, 400);
             this.Name = "Timetable";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Timetable";
             this.tabControl.ResumeLayout(false);
             this.tabConnection.ResumeLayout(false);
@@ -338,6 +411,8 @@
             this.splitContainerSearchConnection.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchConnection)).EndInit();
             this.splitContainerSearchConnection.ResumeLayout(false);
+            this.groupBoxDateConnection.ResumeLayout(false);
+            this.groupBoxDateConnection.PerformLayout();
             this.tabConnectionBoard.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -375,6 +450,12 @@
         private System.Windows.Forms.ColumnHeader clmDestinationTable;
         private System.Windows.Forms.ColumnHeader clmDepartureTable;
         private System.Windows.Forms.ColumnHeader clmType;
+        private System.Windows.Forms.GroupBox groupBoxDateConnection;
+        private System.Windows.Forms.RadioButton radioArrivalConnection;
+        private System.Windows.Forms.RadioButton radioDepartureConnection;
+        private System.Windows.Forms.Timer timer1min;
+        private System.Windows.Forms.DateTimePicker TimePickerConnection;
+        private System.Windows.Forms.DateTimePicker DatePickerConnection;
     }
 }
 
