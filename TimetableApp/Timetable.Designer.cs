@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace TimetableApp
 {
     partial class Timetable
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Timetable));
             this.lblStartSearch = new System.Windows.Forms.Label();
             this.lblDestinationSearch = new System.Windows.Forms.Label();
             this.txtStartSearch = new System.Windows.Forms.ComboBox();
@@ -51,8 +52,8 @@
             this.cmdSearchTable = new System.Windows.Forms.Button();
             this.listDepartureSearch = new System.Windows.Forms.ListView();
             this.clmStartTable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.clmDestinationTable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmDepartureTable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmDestinationTable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl.SuspendLayout();
             this.tabConnection.SuspendLayout();
@@ -113,7 +114,7 @@
             // 
             this.cmdSearchConnection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdSearchConnection.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.cmdSearchConnection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
             this.cmdSearchConnection.Location = new System.Drawing.Point(13, 127);
             this.cmdSearchConnection.Name = "cmdSearchConnection";
             this.cmdSearchConnection.Size = new System.Drawing.Size(209, 21);
@@ -275,7 +276,7 @@
             // 
             this.cmdSearchTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdSearchTable.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.cmdSearchTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
             this.cmdSearchTable.Location = new System.Drawing.Point(13, 62);
             this.cmdSearchTable.Name = "cmdSearchTable";
             this.cmdSearchTable.Size = new System.Drawing.Size(209, 21);
@@ -304,14 +305,14 @@
             this.clmStartTable.Text = "Start";
             this.clmStartTable.Width = 140;
             // 
+            // clmDepartureTable
+            // 
+            this.clmDepartureTable.Text = "Departure";
+            // 
             // clmDestinationTable
             // 
             this.clmDestinationTable.Text = "Destination";
             this.clmDestinationTable.Width = 140;
-            // 
-            // clmDepartureTable
-            // 
-            this.clmDepartureTable.Text = "Departure";
             // 
             // clmType
             // 
@@ -325,6 +326,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(780, 373);
             this.Controls.Add(this.tabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(788, 800);
             this.MinimumSize = new System.Drawing.Size(788, 400);
             this.Name = "Timetable";
