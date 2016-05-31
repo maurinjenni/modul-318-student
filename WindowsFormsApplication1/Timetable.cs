@@ -24,12 +24,14 @@ namespace WindowsFormsApplication1
             searchstation.SearchStations((ComboBox)sender);
         }
 
+        //call searchfunction for stations
         private void txtDestinationSearch_TextUpdate(object sender, EventArgs e)
         {
             Search searchstation = new Search();
             searchstation.SearchStations((ComboBox)sender);
         }
 
+        //call searchfunction for stations
         private void txtDepartureSearch_TextUpdate(object sender, EventArgs e)
         {
             Search searchstation = new Search();
@@ -56,11 +58,13 @@ namespace WindowsFormsApplication1
             Cursor.Current = Cursors.Default;
         }
 
+        //bring back default cursor when dropdown opens
         private void txtDestinationSearch_DropDown(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.Default;
         }
 
+        //bring back default cursor when dropdown opens
         private void txtDepartureSearch_DropDown(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.Default;

@@ -85,22 +85,25 @@ namespace WindowsFormsApplication1
 
             connection = transport.GetConnections(from.Text, to.Text);
 
+            //check if Error is set
             if (transport.Error)
             {
-                //errormessage if no response
-                MessageBox.Show(transport.ThrowedException.Message, "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorNoConnection(transport);
             }
+            //check if result has more than 0 items
             else if (connection.ConnectionList.Count() <= 0)
             {
-                ErrorNoConnection();
+                ErrorNoResult();
             }
-
-            //fill ListView with result
-            foreach (var i in connection.ConnectionList)
+            else
             {
-                string[] sItems = new string[] { i.From.Station.Name, ConvertTimestamp(i.From.Departure), i.From.Platform, i.To.Station.Name, ConvertTimestamp(i.To.Arrival), i.To.Platform, ConvertTimeDuration(i.Duration) };
+                //fill ListView with result
+                foreach (var i in connection.ConnectionList)
+                {
+                    string[] sItems = new string[] { i.From.Station.Name, ConvertTimestamp(i.From.Departure), i.From.Platform, i.To.Station.Name, ConvertTimestamp(i.To.Arrival), i.To.Platform, ConvertTimeDuration(i.Duration) };
 
-                list.Items.Add(new ListViewItem(sItems));
+                    list.Items.Add(new ListViewItem(sItems));
+                }
             }
 
             //set cursor back to default
@@ -121,41 +124,47 @@ namespace WindowsFormsApplication1
             //set cursor to wait
             Cursor.Current = Cursors.WaitCursor;
 
-            //get departureboard
-            Transport transport = new Transport();
-            StationBoardRoot stationboardroot = new StationBoardRoot();
-
+            //check if input is not void
             if (station.Text.Length != 0)
             {
+                //get departureboard
+                Transport transport = new Transport();
+                StationBoardRoot stationboardroot = new StationBoardRoot();
+
                 string stationid = transport.GetStations(station.Text).StationList.First().Id;
                 stationboardroot = transport.GetStationBoard(station.Text, stationid);
 
+                //check if Error is set
                 if (transport.Error)
                 {
-                    //errormessage if no response
-                    MessageBox.Show(transport.ThrowedException.Message, "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ErrorNoConnection(transport);
                 }
+                //check if result has more than 0 items
                 else if (stationboardroot.Entries.Count() <= 0)
                 {
-                    ErrorNoConnection();
+                    ErrorNoResult();
                 }
-
-                //fill ListView with result
-                foreach (var i in stationboardroot.Entries)
+                else
                 {
-                    string[] sItems = new string[] { stationboardroot.Station.Name, ConvertTimestamp(i.Stop.Departure.ToString()), i.To, i.Name };
+                    //fill ListView with result
+                    foreach (var i in stationboardroot.Entries)
+                    {
+                        string[] sItems = new string[] { stationboardroot.Station.Name, ConvertTimestamp(i.Stop.Departure.ToString()), i.To, i.Name };
 
-                    list.Items.Add(new ListViewItem(sItems));
+                        list.Items.Add(new ListViewItem(sItems));
+                    }
                 }
+
             }
             else
             {
-                ErrorNoConnection();
+                ErrorNoResult();
             }
 
             //set cursor back to default
             Cursor.Current = Cursors.Default;
         }
+
 
 
         //format timestamp
@@ -172,10 +181,16 @@ namespace WindowsFormsApplication1
             return timeduration.ToString(@"hh\:mm");
         }
 
-        //errormessage: no connection
-        private void ErrorNoConnection()
+        //errormessage: no response/connection
+        private void ErrorNoConnection(Transport transport)
         {
-            MessageBox.Show("no connections found, please check your input", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(transport.ThrowedException.Message + "\n\nPlease try again or check your input.", "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        //errormessage: no result
+        private void ErrorNoResult()
+        {
+            MessageBox.Show("No connections found, please check your input!", "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
