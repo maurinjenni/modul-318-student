@@ -1,6 +1,3 @@
-# modul-318-Student
+# TimetableApp
 
-Students!
-Fork this repository to your own Github account. Work there with this repository. The intructor will clone your repo for inspection and evaluation.
-
-Have Fun!
+Dokumentation und Programm sind im Ordner "maurinjenni" zu finden!
