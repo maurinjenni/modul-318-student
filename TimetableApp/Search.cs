@@ -10,9 +10,9 @@ namespace TimetableApp
 {
     public class Search
     {
-        //
-        //searchfunction for stations
-        //
+        /// <summary>
+        ///searchfunction for stations
+        /// </summary>
         public void SearchStations(ComboBox combo)
         {
             //search starts when length of input is over 4
@@ -68,12 +68,9 @@ namespace TimetableApp
             }
         }
 
-
-
-
-        //
-        //searchfunction for connections
-        //
+        /// <summary>
+        ///searchfunction for connections
+        /// </summary>
         public void SearchConnections(ComboBox from, ComboBox to, ListView list, DateTimePicker date, DateTimePicker time, RadioButton isArrivalTime)
         {
             //clear items befor new search
@@ -125,12 +122,9 @@ namespace TimetableApp
             Cursor.Current = Cursors.Default;
         }
 
-
-
-
-        //
-        //searchfunction for departureboard
-        //
+        /// <summary>
+        ///searchfunction for departureboard
+        /// </summary>
         public void SearchDepartures(ComboBox station, ListView list)
         {
             //clear items befor new search
@@ -181,29 +175,36 @@ namespace TimetableApp
         }
 
 
-
-        //format timestamp
+        /// <summary>
+        ///format timestamp into HH:mm
+        /// </summary>
         private string ConvertTimestamp(string ts)
         {
             DateTime timestamp = DateTime.Parse(ts);
             return timestamp.ToString("HH:mm");
         }
 
-        //format timeduration
+        /// <summary>
+        ///format timeduration into HH:mm
+        /// </summary>
         private string ConvertTimeDuration(string td)
         {
             TimeSpan timeduration = TimeSpan.ParseExact(td, "dd'd'hh':'mm':'ss", null);
             return timeduration.ToString(@"hh\:mm");
         }
 
-        //format date
+        /// <summary>
+        ///format date into yyyy-MM-dd
+        /// </summary>
         private string ConvertDate(string d)
         {
             DateTime Date = DateTime.Parse(d);
             return Date.ToString("yyyy-MM-dd");
         }
 
-        //errormessage: no response/result
+        /// <summary>
+        ///errormessage no respone/result
+        /// </summary>
         private void ErrorNoConnection()
         {
             MessageBox.Show("No connections found or couldn't be loaded.\n\nPlease try again or check your input.", "An error has occured!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
